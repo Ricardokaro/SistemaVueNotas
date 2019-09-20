@@ -1,10 +1,10 @@
-import express from 'express'
-import serveStatic from 'serve-static' 
-import { join } from "path"
+const express = require('express')
+const serveStatic = require('serve-static') 
+const path = require("path")
 
 app = express()
 
-app.use("/", serveStatic(join(__dirname + '/dist'))) 
+app.use("/", serveStatic(path.join(__dirname + '/dist'))) 
 
 const puerto = process.env.PORT || 5000; 
 app.listen(puerto) 
