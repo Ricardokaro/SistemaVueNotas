@@ -6,7 +6,7 @@ app = express()
 
 app.use("/", serveStatic(join(__dirname + '/dist'))) 
 
-const puerto = process.env.PORT || 8080; 
+const puerto = process.env.PORT || 5000; 
 app.listen(puerto) 
 
 console.log ('servidor iniciado' + puerto);
