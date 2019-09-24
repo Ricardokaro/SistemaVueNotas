@@ -2,7 +2,7 @@
     <v-layout align-center justify-center>
         <v-flex xs12 sm8 md6 lg5 xl4>
             <v-card>
-                <v-toolbar dark color="blue darken-3">
+                <v-toolbar dark color="primary">
                     <v-toolbar-title>
                         Acceso al Sistema
                     </v-toolbar-title>
