@@ -249,8 +249,7 @@
                     console.log(response.data);
                     if(response.data.mensaje == true){
                        me.existeDirector = true;
-                    }
-                    
+                    }                   
                     me.close();
                     me.listar();
                     me.limpiar();                    
