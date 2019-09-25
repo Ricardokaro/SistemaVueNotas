@@ -18,7 +18,7 @@
           Bienvenido {{ this.$store.state.usuario.nombre }}
         </h1>
         <p class="subheading font-weight-regular">
-           Al Sistema de notas onlline,
+           Al Sistema de notas online,
           <br>aqui encontrara todo lo relacionado con sus calificaciones.     
         </p>
       </v-flex>

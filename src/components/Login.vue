@@ -33,8 +33,8 @@
                          ></v-progress-circular>                                               
                     </v-flex>
                 </v-card-text>                
-                <v-card-actions class="px-3 pb-3">
-                    <v-flex text-xs-right>
+                <v-card-actions  class="px-3 pb-3">
+                    <v-flex v-if="!progreso" text-xs-right>
                         <v-btn @click="ingresar" color="primary">Ingresar</v-btn>
                     </v-flex>
                 </v-card-actions>

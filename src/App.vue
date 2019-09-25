@@ -27,7 +27,7 @@
             </v-list-tile>
             <v-list-tile :to="{ name:'anioescolares' }">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>  
+                <v-icon>calendar_today</v-icon>  
               </v-list-tile-action>            
               <v-list-tile-content>
                 <v-list-tile-title>
@@ -37,7 +37,7 @@
             </v-list-tile>
             <v-list-tile :to="{ name:'periodoescolares' }">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>calendar_today</v-icon>
               </v-list-tile-action>            
               <v-list-tile-content>
                 <v-list-tile-title>
@@ -47,7 +47,7 @@
             </v-list-tile>
             <v-list-tile :to="{ name:'cursos' }">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>account_balance</v-icon>
               </v-list-tile-action>            
               <v-list-tile-content>
                 <v-list-tile-title>
@@ -57,7 +57,7 @@
             </v-list-tile>
             <v-list-tile :to="{ name:'areas' }">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>assignment</v-icon>
               </v-list-tile-action>            
               <v-list-tile-content>
                 <v-list-tile-title>
@@ -67,7 +67,7 @@
             </v-list-tile> 
             <v-list-tile :to="{ name:'materias' }">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>assignment</v-icon>
               </v-list-tile-action>            
               <v-list-tile-content>
                 <v-list-tile-title>
@@ -89,7 +89,7 @@
 
               <v-list-tile :to="{ name:'registrardocente' }">
                 <v-list-tile-action>
-                  <v-icon>table_chart</v-icon>
+                  <v-icon>person_add</v-icon>
                 </v-list-tile-action>            
                 <v-list-tile-content>
                   <v-list-tile-title>
@@ -100,7 +100,7 @@
 
               <v-list-tile :to="{ name:'asignardocentecursomaterias' }">
                 <v-list-tile-action>
-                  <v-icon>table_chart</v-icon>
+                  <v-icon>assignment_turned_in</v-icon>
                 </v-list-tile-action>            
                 <v-list-tile-content>
                   <v-list-tile-title>
@@ -111,7 +111,7 @@
 
                <v-list-tile :to="{ name:'asignardirectorgrupo' }">
                 <v-list-tile-action>
-                  <v-icon>table_chart</v-icon>
+                  <v-icon>assignment_ind</v-icon>
                 </v-list-tile-action>            
                 <v-list-tile-content>
                   <v-list-tile-title>
@@ -133,7 +133,7 @@
 
               <v-list-tile :to="{ name:'registrarestudiante' }">
                 <v-list-tile-action>
-                  <v-icon>table_chart</v-icon>
+                  <v-icon>person_add</v-icon>
                 </v-list-tile-action>            
                 <v-list-tile-content>
                   <v-list-tile-title>
@@ -144,7 +144,7 @@
 
               <v-list-tile :to="{ name:'aniocursados' }">
                 <v-list-tile-action>
-                  <v-icon>table_chart</v-icon>
+                  <v-icon>calendar_today</v-icon>
                 </v-list-tile-action>            
                 <v-list-tile-content>
                   <v-list-tile-title>
@@ -167,7 +167,7 @@
 
             <v-list-tile :to="{ name:'registrarcalificaciones' }">
               <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>format_list_numbered</v-icon>
               </v-list-tile-action>           
               <v-list-tile-content>
                 <v-list-tile-title>
@@ -178,7 +178,7 @@
 
               <v-list-tile :to="{ name:'informecalificaciones' }">
                 <v-list-tile-action>
-                  <v-icon>table_chart</v-icon>
+                  <v-icon>format_list_numbered</v-icon>
                 </v-list-tile-action>              
               <v-list-tile-content>
                 <v-list-tile-title>
@@ -186,6 +186,17 @@
                 </v-list-tile-title>
               </v-list-tile-content> 
             </v-list-tile> 
+
+             <v-list-tile :to="{ name:'informedirectores' }">
+                <v-list-tile-action>
+                  <v-icon>record_voice_over</v-icon>
+                </v-list-tile-action>              
+              <v-list-tile-content>
+                <v-list-tile-title>
+                   Informe Director
+                </v-list-tile-title>
+              </v-list-tile-content> 
+            </v-list-tile>
 
           </v-list-group>
         </template>
@@ -213,7 +224,7 @@
 
               <v-list-tile :to="{ name:'usuarios' }">
                 <v-list-tile-action>
-                  <v-icon>table_chart</v-icon>
+                  <v-icon>perm_identity</v-icon>
                 </v-list-tile-action>             
                 <v-list-tile-content>
                   <v-list-tile-title>
@@ -222,46 +233,13 @@
                 </v-list-tile-content> 
               </v-list-tile> 
           </v-list-group>
-        </template>
-        <template v-if="esAdministrador">
-          <v-list-group>
-            <v-list-tile slot="activator">
-              <v-list-tile-content>
-                <v-list-tile-title>
-                  Consultas
-                </v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-
-            <v-list-tile :to="{ name:'' }">
-              <v-list-tile-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-tile-action>            
-              <v-list-tile-content>
-                <v-list-tile-title>
-                Consultas 
-                </v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>  
-
-              <v-list-tile :to="{ name:'' }">
-                <v-list-tile-action>
-                  <v-icon>table_chart</v-icon>
-                </v-list-tile-action>              
-                <v-list-tile-content>
-                  <v-list-tile-title>
-                    Consultas 
-                  </v-list-tile-title>
-                </v-list-tile-content>  
-              </v-list-tile>
-          </v-list-group>
-        </template>
+        </template>      
       </v-list>
     </v-navigation-drawer>
     <v-toolbar :clipped-left="$vuetify.breakpoint.lgAndUp" color="primary" dark app fixed>
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <span class="hidden-sm-and-down">Sistema</span>
+        <span class="hidden-sm-and-down">Sistema de notas INETED</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn @click="salir" v-if="logueado" icon>
