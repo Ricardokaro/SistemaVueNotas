@@ -6,7 +6,7 @@ import store from './store'
 import axios from 'axios'
 
 Vue.config.productionTip = false
-axios.defaults.baseURL = 'http://ricardocaro-001-site1.ctempurl.com/';
+axios.defaults.baseURL = 'http://localhost:62674/';
 new Vue({
   router,
   store,  

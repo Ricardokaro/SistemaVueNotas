@@ -32,7 +32,10 @@
               @change="listarEstudiantesSinCalificacion"              
               label="Perio Escolar"
             ></v-select>
-      </v-flex>    
+      </v-flex>
+      <v-flex xs12 sm12 md12 v-show="valida">
+            <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v"></div>
+      </v-flex>     
       <v-flex xs12 sm12 md12>      
         <v-toolbar flat color="white">        
           <v-toolbar-title>Calificar Estudiantes</v-toolbar-title>
@@ -51,7 +54,9 @@
               <v-text-field
                 type ="number"
                 v-model="props.item.calificacion"
-                label="Calificacion"                
+                label="Calificacion"
+                min="0"        
+                max="10"        
               ></v-text-field> 
             </td>          
             <td class="text-md-left">
@@ -75,10 +80,9 @@
           <template v-slot:no-data>
             <v-btn color="danger" >Resetear</v-btn>
           </template>
-        </v-data-table>            
+        </v-data-table>
       </v-flex>
-    </v-layout> 
-      
+    </v-layout>      
     </v-container>
 </template>
 <script>
@@ -287,9 +291,9 @@
           },
 
           guardar () {
-              /*if(this.validar()){
+              if(this.validar()){
                 return;    
-              }*/
+              }
               let header = {"Authorization" : "Bearer " + this.$store.state.token};
               let configuration = {headers : header};
               if (this.editedIndex > -1) {
@@ -334,29 +338,14 @@
               me.valida = 0;              
               me.validaMensaje = [];              
               
-              if(this.editedIndex < 1){
-                
-                me.cursoxmateriaxdocentes.map(function(x){
-                  if(x.idmateria == me.idmateria){                    
-                    me.validaMensaje.push("-> La materia ya ha Sido asignada a este curso");
-                  }
-                });
-
-                if(me.idmateria == null || me.idmateria.length == 0){
-                  me.validaMensaje.push("-> Debe asignar una materia al curso");
-                }
-              }              
-
-              if(me.iddocente == null || me.iddocente.length == 0){
-                me.validaMensaje.push("-> Debe asignar un docente al curso");
-              }            
-
-              if(me.intensidad_horaria == null || me.intensidad_horaria.length==0){
-                me.validaMensaje.push("-> Debe Agregar intensidad horaria");
-              }             
+            
+              if(me.calificacion < 0 || me.calificacion > 10){
+                me.validaMensaje.push("-> La calificacion debe estar en un rango de (0 - 10)");
+              }
 
               if(me.validaMensaje.length){
                   me.valida = 1;                
+              
               }
               return me.valida;
           }          
