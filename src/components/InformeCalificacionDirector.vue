@@ -10,25 +10,8 @@
         ></v-select>
       </v-flex>
       <v-flex v-show="cursos.length > 0" xs6 sm6 md6>
-        <v-select :items="cursos" v-model="idcurso" @change="listaMaterias" label="Cursos"></v-select>
-      </v-flex>
-      <v-flex v-show="materias.length > 0" xs6 sm6 md6>
-        <v-select
-          :items="materias"
-          v-model="idmateria"
-          @change="listaCalificaciones"
-          label="Materias"
-        ></v-select>
-      </v-flex>
-
-      <!--<v-flex xs6 sm6 md6> 
-            <v-select            
-              :items="estudiantes"
-              v-model="idestudiante" 
-              @change="listaCalificaciones"             
-              label="Estudiantes"
-            ></v-select>
-      </v-flex>-->
+        <v-select :items="cursos" v-model="idcurso" @change="listarEstudiantes()" label="Cursos"></v-select>
+      </v-flex>     
       <v-flex xs12 sm12 md12>
         <v-toolbar flat color="white">
           <v-btn @click="mostrarInforme()"><v-icon>print</v-icon></v-btn>
@@ -85,9 +68,9 @@
                             <td id="cliente">
                               <strong>Docente: </strong> {{ this.$store.state.usuario.nombre }}
                               <br /> 
-                              <strong>Materia: </strong> {{ mostrarMateria }}
+                              <strong>Materia: </strong> 
                               <br />
-                              <strong>Curso: </strong> {{  mostrarCurso }}                             
+                              <strong>Curso: </strong>                            
                             </td>
                           </tr>
                         </tbody>
@@ -134,7 +117,7 @@
                   <footer>
                     <div id="gracias">
                       <p>
-                        <b>Gracias !</b>
+                        <b>Gracias!</b>
                       </p>
                     </div>
                   </footer>
@@ -146,21 +129,15 @@
         </v-toolbar>
         <v-data-table
           :headers="headers"
-          :items="calificaciones"
+          :items="estudiantes"
           :search="search"
           class="elevation-1"
         >
           <template v-slot:items="props">
-            <td class="text-md-left">{{ props.item.estudiante }}</td>            
-            <td v-if="typeof props.item.listadoCalificaciones[0] !== 'undefined'" class="text-md-left">{{ props.item.listadoCalificaciones[0].calificacion }}</td><td v-else class="text-md-left">{{ 0 }}</td>
-            <td v-if="typeof props.item.listadoCalificaciones[0] !== 'undefined'" class="text-md-left">{{ (props.item.listadoCalificaciones[0].periodoescolar.porcentaje/100) * props.item.listadoCalificaciones[0].calificacion }}</td><td v-else class="text-md-left">{{ 0 }}</td>
-            <td v-if="typeof props.item.listadoCalificaciones[1] !== 'undefined'" class="text-md-left">{{ props.item.listadoCalificaciones[1].calificacion }}</td><td v-else class="text-md-left">{{ 0 }}</td>
-            <td v-if="typeof props.item.listadoCalificaciones[1] !== 'undefined'" class="text-md-left">{{ (props.item.listadoCalificaciones[1].periodoescolar.porcentaje/100) * props.item.listadoCalificaciones[1].calificacion }}</td><td v-else class="text-md-left">{{ 0 }}</td>
-            <td v-if="typeof props.item.listadoCalificaciones[2] !== 'undefined'" class="text-md-left">{{ props.item.listadoCalificaciones[2].calificacion }}</td><td v-else class="text-md-left">{{ 0 }}</td>
-            <td v-if="typeof props.item.listadoCalificaciones[2] !== 'undefined'" class="text-md-left">{{ (props.item.listadoCalificaciones[2].periodoescolar.porcentaje/100) * props.item.listadoCalificaciones[2].calificacion }}</td><td v-else class="text-md-left">{{ 0 }}</td>
-            <td v-if="typeof props.item.listadoCalificaciones[3] !== 'undefined'" class="text-md-left">{{ props.item.listadoCalificaciones[3].calificacion }}</td><td v-else class="text-md-left">{{ 0 }}</td>
-            <td v-if="typeof props.item.listadoCalificaciones[3] !== 'undefined'" class="text-md-left">{{ (props.item.listadoCalificaciones[3].periodoescolar.porcentaje/100) * props.item.listadoCalificaciones[3].calificacion }}</td><td v-else class="text-md-left">{{ 0 }}</td>
-            <td>{{ mostrarAcumulado(props.item.listadoCalificaciones) }}</td>
+            <td class="text-md-left">
+              <v-icon small class="mr-2">print</v-icon>            
+            </td>
+            <td class="text-md-left">{{ props.item.estudiante }}</td>
           </template>
           <template v-slot:no-data>
             <v-btn color="danger">Resetear</v-btn>
@@ -187,16 +164,8 @@ export default {
       estudiantes: [],
       dialog: false,
       headers: [
-        { text: "Estudiante", value: "estudiante" },
-        { text: "1°P", value: "periodo1" },
-        { text: "25%", value: "ponderado1" },
-        { text: "2°P", value: "periodo2" },
-        { text: "25%", value: "ponderado2" },
-        { text: "3°P", value: "periodo3" },
-        { text: "25%", value: "ponderado3" },
-        { text: "4°P", value: "periodo4" },
-        { text: "25%", value: "ponderado4" },
-        { text: "Acumulado", value: "acumulado" }
+        { text: 'Opciones', value: 'opciones', sortable: false }, 
+        { text: "Estudiante", value: "estudiante" },     
       ],
       search: "",
       editedIndex: -1,
@@ -222,29 +191,7 @@ export default {
       return this.editedIndex === -1
         ? "Nueva Carga Academica"
         : "Editar Carga Academica";
-    },
-    mostrarMateria: function(){
-      var buscarMateria = {text:'', value:0};
-
-      if(this.materias.length > 0 && this.idmateria != ""){      
-        buscarMateria = this.materias.find(m => m.value === this.idmateria)        
-      }
-      
-      return buscarMateria.text        
-    },
-
-    mostrarCurso: function(){
-      
-       var buscarCurso = {text:'', value:0};
-
-      if(this.cursos.length > 0 && this.idcurso != ""){      
-        buscarCurso = this.cursos.find(m => m.value === this.idcurso)        
-      }
-      
-      return buscarCurso.text 
-
     }
-    
   },
 
   watch: {
@@ -257,6 +204,27 @@ export default {
     this.listarAnioEscolar();
   },
   methods: {
+
+    listarEstudiantes(){
+      let me = this;
+      let header = { Authorization: "Bearer " + this.$store.state.token };
+      let configuration = { headers: header };
+      axios.post("api/Aniocursados/ListarEstudiantesxDirector",
+          {
+            idanio_escolar: me.idanio_escolar,
+            idcurso: me.idcurso,
+            iddirector: me.$store.state.usuario.idusuario
+          },
+          configuration
+        )
+        .then(function(response) {
+          me.estudiantes = response.data;
+          console.log(me.estudiantes)
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
 
     crearPDF(){
       var quotes =  document.getElementById('informe');
@@ -313,7 +281,7 @@ export default {
       var cursosArray = [];
       axios
         .post(
-          "api/Cursoxmateriaxdocentes/ListarCursosDocente",
+          "api/Cursoxmateriaxdocentes/ListarCursosDocenteDirector",
           {
             idanio_escolar: me.idanio_escolar,
             iddocente: me.$store.state.usuario.idusuario
@@ -330,45 +298,6 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-    },
-
-    listaMaterias() {
-      let me = this;
-      let header = { Authorization: "Bearer " + this.$store.state.token };
-      let configuration = { headers: header };
-      this.materias = [];
-      this.idmateria = "";
-      this.calificaciones = [];
-      var meteriasArray = [];
-      axios
-        .post(
-          "api/Cursoxmateriaxdocentes/ListarMateriaDocente",
-          {
-            idanio_escolar: this.idanio_escolar,
-            idcurso: this.idcurso,
-            iddocente: this.$store.state.usuario.idusuario
-          },
-          configuration
-        )
-        .then(function(response) {
-          meteriasArray = response.data;
-          console.log(meteriasArray);
-          meteriasArray.map(function(x) {
-            me.materias.push({ text: x.nombre, value: x.idmateria });
-          });
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    },
-
-    seleccionarMateria(){
-      let me = this
-      if(typeof me.materias.nombre != 'undefined'){
-        var materia = me.materias.find(m => m.idmateria === me.idmateria) 
-        return materia.nombre
-      }
-      return ' '
     },
 
     listaCalificaciones() {

@@ -17,6 +17,7 @@ import Materia from './components/Materia.vue'
 import RegistrarCalificacion from './components/RegistrarCalificacion.vue'
 import InformeCalificacion from './components/InformeCalificacion.vue'
 import AsignarDirectorGrupo from './components/AsignarDirectorGrupo.vue'
+import InformeCalificacionDirector from './components/InformeCalificacionDirector.vue'
 
 Vue.use(Router)
 
@@ -142,6 +143,14 @@ var router = new Router({
       path: '/informecalificaciones',
       name: 'informecalificaciones',     
       component: InformeCalificacion,
+      meta: {
+        docente: true        
+      }
+    },
+    {
+      path: '/informedirectores',
+      name: 'informedirectores',     
+      component: InformeCalificacionDirector,
       meta: {
         docente: true        
       }

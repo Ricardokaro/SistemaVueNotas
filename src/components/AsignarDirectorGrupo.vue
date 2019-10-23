@@ -58,7 +58,7 @@
             <v-card>              
               <v-card-title class="headline">Docente asignado</v-card-title>
               <v-card-text>
-                  Este docente ya ha sido asignado como director de grupo
+                  Ya ha sido asignado un director a este curso O el docente ya ha sido asignado como director 
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
