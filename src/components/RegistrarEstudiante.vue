@@ -286,8 +286,8 @@
           },
 
           limpiar(){
-              this.id="";              
-              this.idrol="";             
+              //this.id="";              
+              //this.idrol="";             
               this.tipo_documento= "";
               this.num_documento= "";
               this.primer_nombre= "";
